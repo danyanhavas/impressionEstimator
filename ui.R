@@ -1,21 +1,32 @@
+# impressionEstimator
+# 4/17/2015
+
+# MG comments:
+# remember user friendliness most important
+# adjusted titles and naming for some fields
+# let's change the selection of lift threshold and confidence to buttons
+# buttons should be easier to use from UX perspective
+
 shinyUI(fluidPage(
-  titlePanel("PowerPropTest"),
+  titlePanel("impressionEstimator"),
   sidebarLayout(
     sidebarPanel(
-      helpText("Choose your inputs for power prop test."),
+      helpText("Choose the appropriate inputs for your test:"),
       
-  # make number input boxes into the UI.
   numericInput("avgRR", label = "Average Response Rate", value = 0.05),
-  helpText("Note: 0.05 represents for 5% CTR"),
+  helpText("Example: if your control has 5% CTR, enter 0.05"),
   hr(),
-  numericInput("lift", label = "Lift", value = 0.1),
-  helpText("Note: 0.1 represents for 10% lift"),
+  # convert this to a button with 1%, 5%, 10%, 15%, 20%
+  numericInput("lift", label = "Lift Threshold", value = 0.1),
+  helpText("Example: choose 10% if you want to detect precision to 10%"),
   hr(),
-  numericInput("sif", label = "Siglificance Level", value = 0.9),
-  helpText("Note: 0.9 represents for 90% confidence"),
+  # convert this to a button with 80%, 85%, 90%, 95%
+  numericInput("sif", label = "Confidence Level", value = 0.9),
+  helpText("Example: select 90% for 90% confidence"),
   hr(),
   numericInput("num", label = "Number of Groups", value = 2),
-  helpText("Note: 2 represents for 2 groups in total including control group"),
+  helpText("Note: this includes the control, so if you are testing 2 alternatives
+           and 1 control, enter 3"),
   hr()
 ),
 mainPanel(
