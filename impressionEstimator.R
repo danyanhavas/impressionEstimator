@@ -1,3 +1,4 @@
+.libPaths("C:\Users\danyan.Li\Documents\R")
 # calls ui and server from github
 # use this to run the tool from any computer
 
