@@ -10,11 +10,17 @@ shinyServer(
              "90%" = 0.90,"95%"=0.95)
     })
     
+    output$liftText <- renderText({
+      paste('We can only detect a difference if the new response rate is', 
+            as.character(input$avgRR*(1+numlift())),'or higher.'
+      )
+    })
+    
     output$text1 <- renderText({ 
       "The number of observations in each group is "
     })
     
-    output$value1<-renderPrint({
+    output$value1<-renderText({
       
       ceiling(power.prop.test(p1=input$avgRR,p2=input$avgRR*(1+numlift()),sig.level=1-numsif(), 
                               power=0.8)[[1]])
@@ -24,7 +30,7 @@ shinyServer(
       "The total number of observations you need is "
     })
     
-    output$value2<-renderPrint({
+    output$value2<-renderText({
       input$num*ceiling(power.prop.test(p1=input$avgRR,p2=input$avgRR*(1+numlift()),sig.level=1-numsif(), 
                                         power=0.8)[[1]])
     })
