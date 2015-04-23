@@ -37,6 +37,7 @@ shinyUI(fluidPage(
                detect as significant. Higher lift thresholds
                require less impressions."
       ),
+      textOutput("liftText"),
       hr()
     )),
     
@@ -71,7 +72,8 @@ shinyUI(fluidPage(
                  helpText("Select lift threshold of 10%"),
                  helpText("Select confidence level of 90%"),
                  br(),
-                 helpText("The number of observations in each group is: 24603")
+                 helpText("The number of observations in each group is 24603,
+                          and the total number of observations is 49206.")
         )
       )
       
