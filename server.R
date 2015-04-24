@@ -23,6 +23,10 @@ shinyServer(
              "90%" = 0.90,"95%"=0.95)
     })
     
+    number<-reactive({ceiling(power.prop.test(p1=input$avgRR,p2=input$avgRR*(1+numlift()),sig.level=1-numsif(), 
+                                              power=0.8)[[1]])
+    })
+    
     output$liftText <- renderText({
       paste('We can only detect a difference if the new response rate is', 
             as.character(input$avgRR*(1+numlift())),'or higher.'
@@ -34,9 +38,10 @@ shinyServer(
     })
     
     output$value1<-renderText({
-      
-      tryIE(ceiling(power.prop.test(p1=input$avgRR,p2=input$avgRR*(1+numlift()),sig.level=1-numsif(), 
-                              power=0.8)[[1]]))
+      validate(
+        need(input$avgRR!="","Please input the average response rate."
+        ))      
+      tryIE(number())
     })
     
     output$text2 <- renderText({ 
@@ -44,8 +49,12 @@ shinyServer(
     })
     
     output$value2<-renderText({
-      tryIE(input$num*ceiling(power.prop.test(p1=input$avgRR,p2=input$avgRR*(1+numlift()),sig.level=1-numsif(), 
-                                        power=0.8)[[1]]))
+      validate(
+        need(input$avgRR!="","Please input the average response rate."
+        ),
+        need(input$num!="","Please input the number of groups."
+        ))
+      tryIE(number()*input$num)
     })
     
     
