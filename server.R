@@ -1,3 +1,16 @@
+# catch all errors to force users to consult with us
+# TODO: 
+# add suggestions on how to fix common errors
+# catch NA values
+tryIE <- function(code, silent=F){
+  tryCatch(code, error = function(c) 'Error: Please consult with Data Science team',
+           warning = function(c) 'Error: Please consult with Data Science team',
+           message = function(c) 'Error: Please consult with Data Science team')
+  }
+
+
+
+
 shinyServer(
   function(input, output) {    
     
@@ -22,8 +35,8 @@ shinyServer(
     
     output$value1<-renderText({
       
-      ceiling(power.prop.test(p1=input$avgRR,p2=input$avgRR*(1+numlift()),sig.level=1-numsif(), 
-                              power=0.8)[[1]])
+      tryIE(ceiling(power.prop.test(p1=input$avgRR,p2=input$avgRR*(1+numlift()),sig.level=1-numsif(), 
+                              power=0.8)[[1]]))
     })
     
     output$text2 <- renderText({ 
@@ -31,8 +44,8 @@ shinyServer(
     })
     
     output$value2<-renderText({
-      input$num*ceiling(power.prop.test(p1=input$avgRR,p2=input$avgRR*(1+numlift()),sig.level=1-numsif(), 
-                                        power=0.8)[[1]])
+      tryIE(input$num*ceiling(power.prop.test(p1=input$avgRR,p2=input$avgRR*(1+numlift()),sig.level=1-numsif(), 
+                                        power=0.8)[[1]]))
     })
     
     
