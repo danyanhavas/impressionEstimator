@@ -9,8 +9,6 @@ tryIE <- function(code, silent=F){
   }
 
 
-
-
 shinyServer(
   function(input, output) {    
     
@@ -38,9 +36,7 @@ shinyServer(
     })
     
     output$value1<-renderText({
-      validate(
-        need(input$avgRR!="","Please input the average response rate."
-        ))      
+     
       tryIE(number())
     })
     
@@ -49,12 +45,9 @@ shinyServer(
     })
     
     output$value2<-renderText({
-      validate(
-        need(input$avgRR!="","Please input the average response rate."
-        ),
-        need(input$num!="","Please input the number of groups."
-        ))
+
       tryIE(number()*input$num)
+      
     })
     
     
