@@ -1,5 +1,4 @@
 # impressionEstimator
-A tool for predicting the amount of impressions needed for statistical significance
 
 Hi! You were probably directed here because you need to estimate the amount of impressions you need to run your A/B or MVT test.
 
