@@ -5,9 +5,10 @@ Hi! You were probably directed here because you need to estimate the amount of i
 Good news! You can do this in 3 simple steps. Feel free to ignore the steps if you're familiar with R:
 
 <ul>
-<li> Download impressionEstimator.R by right-clicking on the link and clicking Save Link As or equivalent
+<li> Download impressionEstimator.R by right-clicking on the [link to the file](https://github.com/danyanhavas/impressionEstimator/blob/master/impressionEstimator.R) and clicking Save Link As or equivalent
 <li> Open R/RStudio 
-<li> Change to the Downloads directory and run the impressionEstimator.R file
+<li> If you're on Windows, move the impressionEstimator.R file to C:\Users\Public
+<li> Execute the code below in R
 </ul>
 
 If you're on a Mac, copy the following commands into R:
@@ -16,9 +17,9 @@ If you're on a Mac, copy the following commands into R:
       source("impressionEstimator.R")
       
       
-If you're on Windows, copy the following commands are:
+If you're on Windows, copy the following commands into R:
 
-      setwd("C:/Downloads")
+      setwd("C:/Users/Public")
       source("impressionEstimator.R")
       
 
