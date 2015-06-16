@@ -15,10 +15,10 @@ shinyUI(fluidPage(
   fluidRow(
     column(3, wellPanel(
       h4("Choose the appropriate inputs for your test:"),
-      numericInput("avgRR", label = "Average Response Rate", value = 0.05,
+      numericInput("avgRR", label = "Average Response Rate", value = 5,
                    min = 0, max = 1, step=.0001),
-      helpText("Enter the known RR of your control as a decimal. 
-               Ex: if your control has a 5% CTR, enter 0.05"
+      helpText("Enter the known RR of your control as a percentage.
+               Ex: if your control has a 5% CTR, enter 5"
       ),
       hr(),
       numericInput("num", label = "Number of Groups", value = 2),
@@ -67,13 +67,26 @@ shinyUI(fluidPage(
                           be able to detect a lift of at least 10% at 90%
                           confidence."),
                  br(),
-                 helpText("Enter Response Rate: 5%"),
+                 helpText("Enter Response Rate: 5"),
                  helpText("Enter number of groups: 2"),
                  helpText("Select lift threshold of 10%"),
                  helpText("Select confidence level of 90%"),
                  br(),
                  helpText("The number of observations in each group is 24603,
                           and the total number of observations is 49206.")
+        ),
+        tabPanel("Timing",
+                 br(),
+                 numericInput("imps", label = "Impressions/Period", value=10000),
+                 helpText("Enter the number of impressions per period."
+                 ),
+                 radioButtons("period", label = "Period",
+                              choices = list("Daily", "Weekly","Monthly","Annually"),
+                              selected ="Weekly",inline=T),
+                 helpText("Select the period."
+                 ),
+                 textOutput("text3")
+                
         )
       )
       

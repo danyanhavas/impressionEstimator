@@ -12,23 +12,29 @@ tryIE <- function(code, silent=F){
 shinyServer(
   function(input, output) {    
     
-    numlift<-reactive({
+    numlift <- reactive({
       switch(input$lift,"1%"=0.01,"5%" =0.05,
              "10%" = 0.10,"15%"=0.15,"20%"=0.20)
     })
-    numsif<-reactive({
+    numsif <- reactive({
       switch(input$sif,"80%"=0.80,"85%" =0.85,
              "90%" = 0.90,"95%"=0.95)
     })
-    # MG - update this to let non technical users
-    # input as a percentage rather than decimal
-    number<-reactive({ceiling(power.prop.test(p1=input$avgRR,p2=input$avgRR*(1+numlift()),sig.level=1-numsif(), 
+    
+    textperiod <- reactive({
+      switch(input$period, "Daily"="days","Weekly"="weeks",
+             "Monthly"="months","Annually"="years")
+    })
+    
+    number <- reactive({ceiling(power.prop.test(p1=input$avgRR/100,
+                                              p2=input$avgRR/100*(1+numlift()),
+                                              sig.level=1-numsif(), 
                                               power=0.8)[[1]])
     })
     
     output$liftText <- renderText({
       paste('We can only detect a difference if the new response rate is', 
-            as.character(input$avgRR*(1+numlift())),'or higher.'
+            as.character(input$avgRR*(1+numlift())),'percent or higher.'
       )
     })
     
@@ -45,12 +51,19 @@ shinyServer(
       "The total number of observations you need is "
     })
     
-    output$value2<-renderText({
+    output$value2 <- renderText({
 
       tryIE(number()*input$num)
       
     })
     
+    output$text3 <- renderText({ 
+      paste('The time period needed for getting the required amount of impressions is', 
+            as.character(tryIE(number()*input$num/input$imps)), 
+            as.character(textperiod())
+      )
+    })
+
     
   })
 
