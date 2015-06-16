@@ -16,7 +16,7 @@ shinyUI(fluidPage(
     column(3, wellPanel(
       h4("Choose the appropriate inputs for your test:"),
       numericInput("avgRR", label = "Average Response Rate", value = 5,
-                   min = 0, max = 1, step=.0001),
+                   min = 0, step=1),
       helpText("Enter the known RR of your control as a percentage.
                Ex: if your control has a 5% CTR, enter 5"
       ),
