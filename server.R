@@ -20,7 +20,8 @@ shinyServer(
       switch(input$sif,"80%"=0.80,"85%" =0.85,
              "90%" = 0.90,"95%"=0.95)
     })
-    
+    # MG - update this to let non technical users
+    # input as a percentage rather than decimal
     number<-reactive({ceiling(power.prop.test(p1=input$avgRR,p2=input$avgRR*(1+numlift()),sig.level=1-numsif(), 
                                               power=0.8)[[1]])
     })
