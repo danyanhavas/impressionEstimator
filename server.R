@@ -58,8 +58,11 @@ shinyServer(
     })
     
     output$text3 <- renderText({ 
-      paste('The time period needed for getting the required amount of impressions is', 
-            as.character(tryIE(number()*input$num/input$imps)), 
+      paste('The time period needed for getting the required amount of impressions is
+            from', 
+            as.character(tryIE(floor(number()*input$num/input$imps))), 
+            'to',
+            as.character(tryIE(ceiling(number()*input$num/input$imps))),
             as.character(textperiod())
       )
     })
